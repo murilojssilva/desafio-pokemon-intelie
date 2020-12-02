@@ -1,0 +1,132 @@
+@import url(//db.onlinewebfonts.com/c/f4d1593471d222ddebd973210265762a?family=Pokemon);
+
+@font-face {
+  font-family: "Pokemon Solid";
+  src: url("./assets/fonts/Pokemon\ Solid.ttf");
+}
+
+@font-face {
+  font-family: "Pokemon";
+  src: url("./assets/fonts/Pokemon\ Hollow.ttf");
+}
+
+@font-face {
+  font-family: "Game Boy";
+  src: url("./assets/fonts/Early\ GameBoy.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+}
+
+.type-title {
+  position: static;
+  display: grid;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 620px;
+  padding: 60px 10px 20px 40px;
+}
+
+.type-title input {
+  display: inline-block;
+  padding-top: 10px;
+  cursor: pointer;
+  border-bottom: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.type-title input::after {
+  display: none;
+}
+
+.not-found h1 {
+  padding: 120px;
+  font-family: "Game Boy";
+}
+
+.not-found p,
+.not-found h1 {
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+.list {
+  width: 69%;
+  text-align: center;
+  justify-content: center;
+}
+
+li {
+  list-style: none;
+  max-width: 100px;
+  height: 300px;
+}
+
+.item-button {
+  cursor: pointer;
+  width: 50%;
+  text-align: center;
+  padding: 5px 8px 5px 8px;
+  display: inline-block;
+  color: #fff;
+  background-color: #68a090;
+  border: 1px solid #44685e;
+}
+
+.finish-button {
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  margin: 0px 0px 10px;
+  padding: 5px 8px 5px 8px;
+  display: inline-block;
+  color: #fff;
+  background-color: #68a090;
+  border: 1px solid #44685e;
+}
+
+.pokemon {
+  max-width: 165px;
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  height: 400px;
+}
+
+.pokemon h3 {
+  text-align: center;
+}
+
+.content {
+  width: 100%;
+}
+
+h1,
+h2,
+h3,
+p,
+a {
+  font-family: "Pokemon Solid";
+  color: #003686;
+}
+
+@media (max-width: 1000px) {
+  .type-title input {
+    margin-right: 30%;
+  }
+}
+
+@media (max-width: 400px) {
+  .list {
+    width: 60%;
+    margin: 0 0;
+  }
+}

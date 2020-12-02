@@ -1,0 +1,44 @@
+.pokelist h1{
+    text-align: center;
+    font-size: 2.25em;
+    margin-bottom: 60px;
+}
+
+.pokedex{
+    margin: 0 auto;
+    width: 90%;
+    text-align: center;
+}
+
+.pokemon{
+    max-width: 165px;
+    width: 100%;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.ReactModalPortal h1{
+    color: #03003f;
+    text-align: center;
+    font-size: 3rem;
+}
+
+.ReactModalPortal img{
+    margin: 30px auto;
+    height: 128px;
+    width: 128px;
+    display: block;
+}
+
+.ReactModalPortal p{
+    text-align: center;
+}
+
+.close{
+    -webkit-appearance: none;
+    padding: 0;
+    cursor: pointer;
+    background: 0 0;
+    border: 0;
+    float: right;
+}
