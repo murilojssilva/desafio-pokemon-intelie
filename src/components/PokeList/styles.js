@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  h1{
+    text-align: center;
+  }
+`;
 
 
 export const Close = styled.button`
