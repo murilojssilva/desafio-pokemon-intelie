@@ -11,7 +11,6 @@ import {
     Close
   } from "./styles";
 
-import "./style.css"
 import CloseIcon from "@material-ui/icons/Close";
 import Modal from 'react-modal';
 
