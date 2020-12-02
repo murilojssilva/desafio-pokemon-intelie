@@ -12,6 +12,7 @@ export const Close = styled.button`
     float: right;
 `
 export const PTable = styled.table`
+  text-align: center;
   max-width: 165px;
   width: 100%;
   display: inline-block;

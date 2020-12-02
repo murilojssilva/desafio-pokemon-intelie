@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useCallback} from "react";
 
 import api from "../../services/api";
+
 
 import {
     Container,
@@ -14,13 +15,23 @@ import {
 import CloseIcon from "@material-ui/icons/Close";
 import Modal from 'react-modal';
 
-import "react-pagination-library/build/css/index.css"; 
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)',
+    textAlign             : 'center'
+  }
+};
 
 export default function PokeList() {
     const [pokemons, setPokemons] = useState([]);
     const [pokemon,setPokemon] = useState([]);
-    const total = 20;
-    const limit = 10;
+    const [total,setTotal] = useState(0);
+    const [limit,setLimit] = useState(50);
     const [pages, setPages] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [modalIsOpen,setIsOpen] = useState(false);
@@ -28,51 +39,53 @@ export default function PokeList() {
     useEffect(() => {
         async function fetchPokemons() {
           const response = await api.get(
-            `/pokemon?page=${currentPage}&limit=${limit}`
+            `/pokemon?offset=${currentPage}&limit=${limit}`
           );
-          
+          console.log(currentPage);
+          setTotal(response.data.count);
           const totalPages = Math.ceil(total / limit);
-    
           const arrayPages = [];
-            for (let i = 1; i <= totalPages; i++) {
+          for (let i = 1; i <= totalPages; i++) {
             arrayPages.push(i);
-        }
-    
+          }
           setPages(arrayPages);
           setPokemons(response.data.results);
         }
         fetchPokemons();
-      }, [currentPage, limit, total]);
-        
-      
-
-      async function openModal(index) {
+      }, [currentPage,total,limit]);
+    async function openModal(index) {
         setIsOpen(true);
         const responseId = await api.get(`/pokemon/${index+1}`);
         setPokemon(responseId.data);
     }
      
-     
       function closeModal(){
         setIsOpen(false);
-      } 
-   
-          
+      }
+      const limits = useCallback((e) => {
+        setLimit(e.target.value);
+        setCurrentPage(1);
+      }, []);
+        
     return (
         <Container>
             <h1>Lista dos Pokémons</h1>
-            
+            <select onChange={limits}>
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="200">200</option>
+              <option value="300">300</option>
+            </select>
             <ul>
             {pokemons.map((pokemon,index) => (
                 <PTable value={index} key={index} onClick={() => openModal(index)}>
-                    <h3>{pokemon.name}</h3>
                     <img
                         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url
                         .replace("https://pokeapi.co/api/v2/pokemon/", "")
                         .replace("/", ".png")}`}
                         alt={pokemon.name}
                     />
-                    <button value={index} onClick={() => openModal(index)}>Ver detalhes</button>
+                    <h3>{pokemon.name}</h3>
                 </PTable>
                 ))}
             </ul>
@@ -81,6 +94,7 @@ export default function PokeList() {
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
+          style={customStyles}
           contentLabel="Example Modal"
         >
           <Close onClick={closeModal}>
@@ -93,7 +107,6 @@ export default function PokeList() {
             />
             <p><strong>Altura</strong>: {pokemon.height} cm</p>
             <p><strong>Peso</strong>: {pokemon.weight} kg</p>
-
         </Modal>
         <Pagination>
         <PaginationButton>
@@ -118,7 +131,6 @@ export default function PokeList() {
           )}
         </PaginationButton>
       </Pagination>
-        
     </Container>
     )
 }
